@@ -14,6 +14,34 @@ const userSchema = new Schema(
             required: true,
             unique: true,
             validate: [validator.isEmail, 'invalid email']
-        }
+        },
+        thoughts: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Thought'
+            },
+        ],
+        friends: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'User'
+            },
+        ],
+    },
+    {
+        toJson: {
+            virtuals: true,
+        },
+        id: false,
     }
-)
+);
+
+//Virtual method for retrieving and displaying length of friend array for that particular user
+userSchema.virtual('friendCount').get(function () {
+    return this.friends.length;
+});
+
+//Does casing matter for the collection name in string?
+const User = model('User', userSchema);
+
+module.exports = User;
