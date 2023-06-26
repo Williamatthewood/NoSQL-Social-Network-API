@@ -40,7 +40,23 @@ module.exports = {
         }
     },
     //PUT/ update a user
-    //TODO: write PUT function
+    async updateUser(req, res) {
+        try {
+            const user = await User.findOneAndUpdate(
+                { _id: req.params.userId },
+                { $set: req.body },
+                { runValidators: true, new: true }
+            );
+
+            if(!user) {
+                res.status(404).json({ message: 'No user with that ID' });
+            }
+
+            res.json(user);
+        } catch (err){
+            res.status(500).json(err);
+        }
+    },
 
     //DELETE a user
     async deleteUser(req, res) {
