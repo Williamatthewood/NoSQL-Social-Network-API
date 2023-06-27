@@ -14,11 +14,13 @@ module.exports = {
         }
     },
     //GET Single User
+    //TODO: populate thought and friend data
     async getSingleUser(req, res) {
         try{
-            const user = await User.findOne({ _id: req.params.studentId })
-            //not needed?
-            // .select('-__v');
+            const user = await User.findOne({ _id: req.params.userId })
+            .select('-__v')
+            .populate('thoughts')
+            .populate('friends');
 
             if(!user) {
                 return res.status(404).json({ message: 'No user with that ID' })
@@ -60,7 +62,7 @@ module.exports = {
 
     //DELETE a user
     async deleteUser(req, res) {
-        try {
+        try { //might need to be findOneAndRemove? Documentation said this should work
             const user = await User.findOneAndDelete({ _id: req.params.userId });
 
             if(!user) {
@@ -70,7 +72,7 @@ module.exports = {
             //first, find the username of the user by id since we have it
             // then do a deleteMany using that username as the criteria
             // const thoughts = await Thought.deleteMany({ username: }) 
-
+            res.json(user);
         } catch (err) {
             console.log(err);
             res.status(500).json(err);

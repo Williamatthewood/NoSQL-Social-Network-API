@@ -28,7 +28,7 @@ module.exports = {
     // POST a thought. req.body should have userId and push the thought's _id to that user 
     async createThought(req, res) {
         try {
-        //is it ok to send the userId i the body? maybe just send username and try findOneAndUpdate with username instead?
+        //is it ok to send the userId in the body? maybe just send username and try findOneAndUpdate with username instead?
         const thought = await Thought.create(req.body);
         
         //push the newly created thought to the associated user
