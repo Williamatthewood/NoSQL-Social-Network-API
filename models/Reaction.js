@@ -17,7 +17,7 @@ const reactionSchema = new Schema(
         },
         createdAt: {
             type: Date,
-            default: Date.now()
+            default: Date.now
             //TODO: getter method to format the timestamp on query
         }
     },
@@ -27,4 +27,6 @@ const reactionSchema = new Schema(
         },
         id: false,
     }
-)
+);
+
+module.exports = reactionSchema;
