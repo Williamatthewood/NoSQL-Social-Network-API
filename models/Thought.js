@@ -1,5 +1,4 @@
 const { Schema, model } = require('mongoose');
-//TODO: create reactionSchema and export
 const reactionSchema = require('./Reaction');
 
 const thoughtSchema = new Schema(
@@ -15,7 +14,7 @@ const thoughtSchema = new Schema(
             default: Date.now()
             //TODO: getter method to format the timestamp on query?
         },
-        username: { //need to get the user that creates the thought
+        username: { 
             type: String,
             required: true,
         },

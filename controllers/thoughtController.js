@@ -38,7 +38,7 @@ module.exports = {
             { runValidators: true, new: true }
         );
 
-        res.json(thought, user);
+        res.json(thought);
         } catch (err) {
         console.log(err);
         return res.status(500).json(err);
@@ -71,6 +71,7 @@ module.exports = {
             if(!thought) {
                 return res.status(404).json({ message: 'No such user exists' });
             }
+            res.json(thought);
         } catch (err) {
             console.log(err);
             res.status(500).json(err);

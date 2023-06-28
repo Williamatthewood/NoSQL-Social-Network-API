@@ -31,6 +31,7 @@ const userSchema = new Schema(
     {
         toJson: {
             virtuals: true,
+            getters: true,
         },
     }
 );
@@ -40,7 +41,6 @@ userSchema.virtual('friendCount').get(function () {
     return this.friends.length;
 });
 
-//Does casing matter for the collection name in string?
 const User = model('User', userSchema);
 
 module.exports = User;
