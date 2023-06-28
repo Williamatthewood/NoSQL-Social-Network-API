@@ -17,8 +17,8 @@ const reactionSchema = new Schema(
         },
         createdAt: {
             type: Date,
-            default: Date.now
-            //TODO: getter method to format the timestamp on query
+            default: Date.now,
+            get: formatDate,
         }
     },
     {
@@ -28,5 +28,10 @@ const reactionSchema = new Schema(
         _id: false,
     }
 );
+
+function formatDate(date) {
+    let formattedDate = new Date(date).toLocaleDateString();
+    return formattedDate;
+}
 
 module.exports = reactionSchema;
